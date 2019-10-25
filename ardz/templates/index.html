@@ -1,0 +1,39 @@
+{%extends 'all-app/base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Awwardz</title>
+    <style>
+        /* got this style from:https://stackoverflow.com/questions/39198975/how-can-i-make-image-fit-in-div-django */
+        
+        #img-post {
+            padding: 0;
+            display: block;
+            /* margin: 0 auto auto 0; */
+            height: 200px;
+            width: 200px;
+            max-height: 200px;
+            max-width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    {% block content %} {{block.super}}
+    <div class='container'>
+        <div class="row">
+            {% for proj in project %}
+            <div class="thumbnail" style="background-image: white;">
+                <img class="img-responsive" src='{{proj.screenshot.url}}'>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

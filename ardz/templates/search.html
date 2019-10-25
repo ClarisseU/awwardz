@@ -1,0 +1,37 @@
+{% extends 'all-app/base.html' %}{% block content %}{{block.super}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            {% if titles %}
+            <h2>Found {{ titles|length }} of searched term {{message}}</h2>
+            {% else %}
+            <h2> Found no project of that title {{message}}</h2>
+            {% endif %}
+
+        </div>
+
+        <div class="row">
+
+            {% if titles %} {% for title in titles %}
+            <div class="col-sm-6 col-md-3">
+                <h1>{{title.title}}</h1>
+                <img src='{{title.screenshot.url}}'> {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
