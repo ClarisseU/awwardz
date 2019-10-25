@@ -5,7 +5,7 @@ from tinymce.models import HTMLField
 # Create your models here.
 class Projects(models.Model):
     title= models.CharField(max_length=60, null=True)
-    landing_image = models.ImageField(upload_to='image/', null=True)
+    screenshot = models.ImageField(upload_to='image/', null=True)
     description = models.CharField(max_length=60, null=True)
     link = HTMLField()
     
@@ -14,13 +14,17 @@ class Projects(models.Model):
     
     def save_project(self):
         self.save()
+     
+    @classmethod    
+    def search_by_title(cls, search_term):
+        title = cls.objects.filter(title__icontains=search_term)
+        return title
     
     
 class Profile(models.Model):
     picture = models.ImageField(upload_to='profile/', null=True)
     bio = models.CharField(max_length=60, null=True)
-    project = models.ForeignKey(Projects, null=True)
-    user_contact = models.ForeignKey(User,on_delete=models.CASCADE)
+    user= models.ForeignKey(User,on_delete=models.CASCADE)
     
     def __str__(self):
         return str(self.bio)
@@ -30,3 +34,4 @@ class Profile(models.Model):
 
 class Review(models.Model):
     pass
+
