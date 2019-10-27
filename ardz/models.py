@@ -20,6 +20,10 @@ class Projects(models.Model):
         title = cls.objects.filter(title__icontains=search_term)
         return title
     
+    @classmethod
+    def get_all_projects(cls):
+        project = cls.objects.all().prefetch_related('comments_set')
+    
     
 class Profile(models.Model):
     picture = models.ImageField(upload_to='profile/', null=True)
@@ -31,6 +35,12 @@ class Profile(models.Model):
     
     def save_profile(self):
         self.save()
+        
+class Comments(models.Model):
+    comment_cont = models.CharField(max_length=120)
+    commented_by = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    commented_project = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True)
+            
 
 class Review(models.Model):
     pass
