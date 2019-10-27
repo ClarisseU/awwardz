@@ -14,10 +14,10 @@
             padding: 0;
             display: block;
             /* margin: 0 auto auto 0; */
-            height: 200px;
-            width: 200px;
-            max-height: 200px;
-            max-width: 200px;
+            height: 100px;
+            width: 100px;
+            max-height: 100px;
+            max-width: 100px;
         }
     </style>
 </head>
@@ -28,10 +28,13 @@
         <div class="row">
             {% for proj in project %}
             <div class="thumbnail" style="background-image: white;">
-                <img class="img-responsive" src='{{proj.screenshot.url}}'>
+                <img id="img-post" class="img-responsive" src='{{proj.screenshot.url}}' height='520' width='850'>
             </div>
-            {% endfor %}
         </div>
+        {% for com in proj.comments_set.all %}
+        <p>{{com.comment_cont}}</p>
+        {% endfor %}
+        <a href="{%url 'comment' proj.id%}" class="btn btn-primary">comment</a> {% endfor %}
     </div>
     {% endblock %}
 </body>
