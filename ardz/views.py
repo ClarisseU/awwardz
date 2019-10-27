@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Profile, Projects
-from .forms import NewPostForm, ProfileForm
+from .models import Profile, Projects, Comments
+from .forms import NewPostForm, ProfileForm,commentForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectSerializer
@@ -12,8 +12,11 @@ from .serializer import ProfileSerializer, ProjectSerializer
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     project = Projects.objects.all()
-    
-    return render(request, 'index.html',{'project':project})
+    current_user = request.user
+    user_profile = Profile.objects.all()
+    profile = Profile.objects.filter(id=current_user.id).first()
+    comment = Comments.objects.filter(id = current_user.id).first()
+    return render(request, 'index.html', {'project':project,'user_profile':user_profile, 'profile': profile, 'comment':comment})
     
 @login_required(login_url='/accounts/login')    
 def post(request,id):
@@ -81,3 +84,24 @@ class ProjectList(APIView):
         all_merch1 = Projects.objects.all()
         serializers = ProjectSerializer(all_merch1, many=True)
         return Response(serializers.data)    
+
+@login_required(login_url='/accounts/login')
+def comment(request, id):
+    current_user = request.user
+    project = Projects.objects.filter(id = id).first()
+    print(project)
+    prfl = Profile.objects.filter(user = current_user.id).first()
+    print(prfl)
+    if request.method == 'POST':
+        form = commentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit = False)
+            comment.commented_by = prfl
+            comment.commented_project = project
+            comment.save()
+            return redirect('welcome')
+    else:
+        form = commentForm()
+    return render(request, 'commentform.html', {'form': form, 'id':id})
+        
+        
