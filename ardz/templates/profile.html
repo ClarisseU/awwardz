@@ -141,27 +141,30 @@
                 <p>Bio: {{profiles.bio}}</p>
             </div>
         </div>
-        <!-- <div class="container">
+        <div>
+            <br>
+            <br>
+        </div>
+        <div class="container">
             <div class="row masonry-container">
-                {%for i in image%}
+                {%for p in project%}
                 <div class="item col-md-4">
                     <div class="well">
                         <div class="thumbnail" style="background-image:white">
-                            <img id="img-post" src="{{i.image.url}}" class="img-responsive">
-                            <p><strong>{{i.user}}</strong> {{i.caption}}</p>
-                            <p><strong>{{i.likes}} likes</strong></p>
-                            <a href="{% url 'like' id=i.id %}" id="like"><img class="img-responsive" src="http://www.i2symbol.com/force_download.php?file=images/symbols/love/white_heart_suit_u2661_icon_256x256.png" heigth="50px" width="60px" heigth="100px" width="80px"></a>
-                            {% for com in i.comments_set.all%}
+                            <img id="img-post" class="img-responsive" src='{{proj.screenshot.url}}' height='520' width='750'>
+                            <p><strong>{{p.user}}</strong></p>
+
+                            {% for com in p.comments_set.all%}
                             <p>{{com.comment_cont}}</p>
                             {% endfor %}
-                            <a href="{%url 'comment' i.id%}" class="btn btn-primary">Comment</a>
+                            <a href="{%url 'comment' p.id%}" class="btn btn-primary">Comment</a>
 
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        </div> -->
+        </div>
     </div>
 
 

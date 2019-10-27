@@ -28,7 +28,7 @@
         <div class="row">
             {% for proj in project %}
             <div class="thumbnail" style="background-image: white;">
-                <img id="img-post" class="img-responsive" src='{{proj.screenshot.url}}' height='520' width='850'>
+                <img id="img-post" class="img-responsive" src='{{proj.screenshot.url}}' height='520' width='750'>
             </div>
         </div>
         {% for com in proj.comments_set.all %}
