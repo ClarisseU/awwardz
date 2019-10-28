@@ -34,11 +34,17 @@
         {% for com in proj.comments_set.all %}
         <p>{{com.comment_cont}}</p>
         {% endfor %}
+
+        <p><strong>design:</strong>{{proj.design}}</p>
+        <p><strong>usability:</strong>{{proj.usability}}</p>
+        <p><strong>content:</strong>{{proj.content}}</p>
+        <p>By <span><strong>{{user.username}}</strong></span> with <span>{{rating}}</span></p>
         <a href="{%url 'comment' proj.id%}" class="btn btn-primary">comment</a>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{proj.id}}">
-    Rating
-  </button>
+        <a href="{%url 'rating' id=proj.id%}" class="btn btn-primary" data-toggle="modal" data-target="#{{proj.id}}">
+  Vote
+</a>
+
 
         <!-- Modal -->
         <div class="modal fade" id="{{proj.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -57,7 +63,7 @@
                         <p><strong>content:</strong>{{proj.content}}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary">Close</button>
+                        <!-- <button type="button" class="btn btn-secondary">Close</button> -->
                         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                     </div>
                 </div>
