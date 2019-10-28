@@ -12,11 +12,16 @@ from .serializer import ProfileSerializer, ProjectSerializer
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     project = Projects.objects.all()
+    avg=0
     current_user = request.user
     user_profile = Profile.objects.all()
     profile = Profile.objects.filter(id=current_user.id).first()
     comment = Comments.objects.filter(id = current_user.id).first()
-    return render(request, 'index.html', {'project':project,'user_profile':user_profile, 'profile': profile, 'comment':comment})
+    for p in projects:
+        avg = (p.design + p.usability + p.content)/3
+        rating = round(avg,2)
+    
+    return render(request, 'index.html', {'project':project,'user_profile':user_profile, 'profile': profile, 'comment':comment, 'rating':rating})
     
 @login_required(login_url='/accounts/login')    
 def post(request,id):
