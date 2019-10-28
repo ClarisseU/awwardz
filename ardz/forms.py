@@ -14,4 +14,9 @@ class ProfileForm(forms.ModelForm):
 class commentForm(forms.ModelForm):
     class Meta:
         model = Comments
-        exclude = ['commented_by','commented_project']           
+        exclude = ['commented_by','commented_project'] 
+        
+class VoteForm(forms.ModelForm):
+    class Meta:
+        model = Projects
+        fields = ('design','usability','content')                  
