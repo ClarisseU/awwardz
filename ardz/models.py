@@ -8,6 +8,11 @@ class Projects(models.Model):
     screenshot = models.ImageField(upload_to='image/', null=True)
     description = models.CharField(max_length=60, null=True)
     link = HTMLField()
+    user= models.ForeignKey(User,on_delete=models.CASCADE, null=True)
+    design = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0, null= True)
+    usability = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0, null= True)
+    content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0, null= True)
+    vote_submissions = models.IntegerField(default=0, null= True)
     
     def __str__(self):
         return str(self.title)
