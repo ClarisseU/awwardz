@@ -13,6 +13,7 @@ urlpatterns=[
     url(r'^api/merch/$', views.ProfileList.as_view(), name='profile_api'),
     url(r'^api/merch1/$', views.ProjectList.as_view(), name='project_api'),
     url(r'^new/comment/(\d+)/$',views.comment, name ='comment'),
+    url(r'^vote/(?P<id>\d+)',views.rating,name='rating'),
 
 ]
 if settings.DEBUG:
