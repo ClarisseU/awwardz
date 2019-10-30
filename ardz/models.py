@@ -45,7 +45,12 @@ class Comments(models.Model):
     comment_cont = models.CharField(max_length=120)
     commented_by = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     commented_project = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True)
+    
+    def __str__(self):
+        return str(self.comment_cont)
             
+    def save_comment(self):
+        self.save()        
 
 class Review(models.Model):
     pass

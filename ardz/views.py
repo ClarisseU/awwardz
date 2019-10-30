@@ -17,7 +17,7 @@ def welcome(request):
     user_profile = Profile.objects.all()
     profile = Profile.objects.filter(id=current_user.id).first()
     comment = Comments.objects.filter(id = current_user.id).first()
-    for p in projects:
+    for p in project:
         avg = (p.design + p.usability + p.content)/3
         rating = round(avg,2)
     
