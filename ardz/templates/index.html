@@ -8,9 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Awwardz</title>
     <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
         /* got this style from:https://stackoverflow.com/questions/39198975/how-can-i-make-image-fit-in-div-django */
         
         #img-post {
+            opacity: 1;
             padding: 0;
             display: block;
             /* margin: 0 auto auto 0; */
@@ -18,8 +22,11 @@
             width: 100px;
             max-height: 100px;
             max-width: 100px;
+            /* transition: .5s ease;
+            backface-visibility: hidden; */
         }
     </style>
+
 </head>
 
 <body>
@@ -34,7 +41,7 @@
             <div class=" row ">
                 {% for proj in project %}
                 <div class="thumbnail " style="background-image: white; ">
-                    <img id="img-post " class="img-responsive " src='{{proj.screenshot.url}}' height='520' width='750'>
+                    <img id="img-post " class="img-responsive " src='{{proj.screenshot.url}}' height='520' width='750' data-toggle="modal" data-target="#{{proj.id}}">
                 </div>
             </div>
             {% for com in proj.comments_set.all %}
@@ -51,36 +58,26 @@
             <div>
                 <br>
             </div>
-            <!-- Button trigger modal -->
-            <a href="{%url 'rating' id=proj.id%} " data-toggle="modal " data-target="#{{proj.id}} ">
-            View the project's information
-        </a>
-
-
             <!-- Modal -->
-            <div class="modal fade " id="{{proj.id}} " tabindex="-1 " role="dialog " aria-labelledby="exampleModalScrollableTitle " aria-hidden="true ">
-                <div class="modal-dialog modal-dialog-scrollable " role="document ">
-                    <div class="modal-content ">
-                        <div class="modal-header ">
-                            <h5 class="modal-title " id="exampleModalScrollableTitle "><strong>{{proj.title}}</strong></h5>
-                            <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
-            <span aria-hidden="true ">&times;</span>
-          </button>
+            <div class="modal fade" id="{{proj.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">{{proj.title}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
                         </div>
-                        <div class="modal-body ">
-                            <span class="border border-success ">
-                        <img heigth="420 " width="450 " src="{{proj.screenshot.url}} " class="img-responsive " alt="Image ">
-                        <p><strong>Description:</strong>{{proj.description}}</p>
-                        <p><strong>click the link the view the projec:</strong>{{proj.link}}</p>
-                    </span>
+                        <div class="modal-body">
+                            <img heigth="420 " width="450 " src="{{proj.screenshot.url}} " class="img-responsive " alt="Image ">
+                            <p><strong>Description:</strong>{{proj.description}}</p>
+                            <p><strong>click the link the view the projec:</strong>{{proj.link}}</p>
                         </div>
-                        <div class="modal-footer ">
-                            <!-- <button type="button " class="btn btn-secondary ">Close</button> -->
-                            <!-- <button type="button " class="btn btn-primary ">Save changes</button> -->
-                        </div>
+
                     </div>
                 </div>
             </div>
+
             <br>{% endfor %}
 
 
