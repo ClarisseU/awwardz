@@ -25,53 +25,69 @@
 <body>
     {% block content %} {{block.super}}
     <div class='container'>
-        <div class="row">
-            {% for proj in project %}
-            <div class="thumbnail" style="background-image: white;">
-                <img id="img-post" class="img-responsive" src='{{proj.screenshot.url}}' height='520' width='750'>
-            </div>
+        <div class="jumbotron" width='750' style="background-color: rgb(39, 143, 35);">
+            <h3 style="text-align: center; color:lightgray ">AWWARDS</h3>
         </div>
-        {% for com in proj.comments_set.all %}
-        <p>{{com.comment_cont}}</p>
-        {% endfor %}
+        <span><p><strong>Vote for the best project and feel free to leave a comment!</strong></p></span>
 
-        <p><strong>design:</strong>{{proj.design}}</p>
-        <p><strong>usability:</strong>{{proj.usability}}</p>
-        <p><strong>content:</strong>{{proj.content}}</p>
-        <p>By <span><strong>{{user.username}}</strong></span> with <span>{{rating}}</span></p>
-        <a href="{%url 'comment' proj.id%}" class="btn btn-primary">comment</a>
-        <!-- Button trigger modal -->
-        <a href="{%url 'rating' id=proj.id%}" class="btn btn-primary" data-toggle="modal" data-target="#{{proj.id}}">
-  Vote
-</a>
+        <div class="thumbnail" style="background-image: rgb(4, 131, 15); justify-content:right; align-content: right;">
+            <div class=" row ">
+                {% for proj in project %}
+                <div class="thumbnail " style="background-image: white; ">
+                    <img id="img-post " class="img-responsive " src='{{proj.screenshot.url}}' height='520' width='750'>
+                </div>
+            </div>
+            {% for com in proj.comments_set.all %}
+            <p>{{com.comment_cont}}</p>
+            {% endfor %}
+            <a href="{%url 'comment' proj.id%} " class="btn btn-success ">comment</a>
+            <span class="border border-success ">
+            <p><strong>design:</strong>{{proj.design}}</p>
+            <p><strong>usability:</strong>{{proj.usability}}</p>
+            <p><strong>content:</strong>{{proj.content}}</p>
+            <p>By <span><strong>{{user.username}}</strong></span> with <span>{{rating}}</span></p>
+            </span>
+            <a href="{%url 'rating' id=proj.id%} " class="btn btn-success ">vote</a>
+            <div>
+                <br>
+            </div>
+            <!-- Button trigger modal -->
+            <a href="{%url 'rating' id=proj.id%} " data-toggle="modal " data-target="#{{proj.id}} ">
+            View the project's information
+        </a>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="{{proj.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle"><strong>{{proj.title}}</strong></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <!-- Modal -->
+            <div class="modal fade " id="{{proj.id}} " tabindex="-1 " role="dialog " aria-labelledby="exampleModalScrollableTitle " aria-hidden="true ">
+                <div class="modal-dialog modal-dialog-scrollable " role="document ">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title " id="exampleModalScrollableTitle "><strong>{{proj.title}}</strong></h5>
+                            <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
+            <span aria-hidden="true ">&times;</span>
           </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- <img src="{{proj.screenshot.url}}" class="img-responsive" alt="Image"> -->
-                        <p><strong>design:</strong>{{proj.design}}</p>
-                        <p><strong>usability:</strong>{{proj.usability}}</p>
-                        <p><strong>content:</strong>{{proj.content}}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary">Close</button> -->
-                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                        </div>
+                        <div class="modal-body ">
+                            <span class="border border-success ">
+                        <img heigth="420 " width="450 " src="{{proj.screenshot.url}} " class="img-responsive " alt="Image ">
+                        <p><strong>Description:</strong>{{proj.description}}</p>
+                        <p><strong>click the link the view the projec:</strong>{{proj.link}}</p>
+                    </span>
+                        </div>
+                        <div class="modal-footer ">
+                            <!-- <button type="button " class="btn btn-secondary ">Close</button> -->
+                            <!-- <button type="button " class="btn btn-primary ">Save changes</button> -->
+                        </div>
                     </div>
                 </div>
             </div>
+            <br>{% endfor %}
+
+
         </div>
-        {% endfor %}
+
     </div>
     {% endblock %}
 </body>
 
-</html>
+</html>s
